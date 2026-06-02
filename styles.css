@@ -24,6 +24,13 @@ html, body {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Фіксуем старонку: гартаецца толькі панэль зон, а не ўвесь экран */
+html { overflow: hidden; }
+body {
+  position: fixed; inset: 0; overflow: hidden;
+  overscroll-behavior: none;
+}
+
 #map { position: absolute; inset: 0; z-index: 0; background: #e9e5df; }
 
 /* ===== Шапка ===== */
