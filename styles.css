@@ -1,0 +1,100 @@
+:root {
+  --accent: #b5402a;        /* асноўны колер інтэрфейсу */
+  --panel-bg: #ffffff;
+  --text: #1c1c1c;
+  --muted: #6b6b6b;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--text);
+}
+
+#map { position: absolute; inset: 0; z-index: 0; }
+
+/* Шапка */
+.topbar {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(6px);
+  padding: 10px 14px; display: flex; align-items: center; gap: 10px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+}
+.topbar h1 { font-size: 16px; margin: 0; font-weight: 700; }
+.topbar .sub { font-size: 12px; color: var(--muted); margin: 0; }
+
+/* Кнопка «Зоны» */
+.toggle-list {
+  margin-left: auto; border: none; background: var(--accent); color: #fff;
+  padding: 9px 14px; border-radius: 999px; font-size: 14px; font-weight: 600;
+  cursor: pointer; white-space: nowrap;
+}
+
+/* Ніжняя панэль са сьпісам зон */
+.sheet {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 1000;
+  background: var(--panel-bg); border-radius: 16px 16px 0 0;
+  box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.2);
+  transform: translateY(calc(100% - 54px));
+  transition: transform 0.28s ease;
+  max-height: 70vh; display: flex; flex-direction: column;
+}
+.sheet.open { transform: translateY(0); }
+.sheet-handle {
+  padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px;
+  border-bottom: 1px solid #eee; position: relative;
+}
+.sheet-handle .bar {
+  width: 36px; height: 5px; background: #ccc; border-radius: 3px;
+  position: absolute; left: 0; right: 0; top: 6px; margin: 0 auto;
+}
+.sheet-handle strong { font-size: 15px; }
+.sheet-handle .count { color: var(--muted); font-size: 13px; }
+
+.zone-list { overflow-y: auto; padding: 6px 8px 16px; }
+.zone-item {
+  display: flex; align-items: center; gap: 12px; padding: 11px 12px;
+  border-radius: 12px; cursor: pointer;
+}
+.zone-item:active, .zone-item:hover { background: #f4f1ee; }
+.zone-item .name { font-weight: 600; font-size: 15px; }
+.zone-item .meta { font-size: 12.5px; color: var(--muted); }
+
+.dot {
+  width: 14px; height: 14px; border-radius: 50%; flex: 0 0 auto;
+  border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+/* Загаловак групы ў сьпісе зон */
+.zone-group {
+  padding: 12px 12px 4px; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted);
+}
+
+/* Легенда катэгорый */
+.legend {
+  background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(6px);
+  padding: 8px 10px; border-radius: 10px; box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+  font-size: 12.5px; line-height: 1.5; max-width: 60vw;
+}
+.legend-row { display: flex; align-items: center; gap: 7px; white-space: nowrap; }
+.legend-row .dot { width: 11px; height: 11px; }
+
+/* Поп-апы */
+.leaflet-popup-content { margin: 12px 14px; font-size: 14px; line-height: 1.4; }
+.leaflet-popup-content h3 { margin: 0 0 4px; font-size: 15px; }
+
+/* Подпіс вобласьці (палігона) на мапе */
+.zone-label {
+  color: #fff; font-weight: 600; font-size: 12px; padding: 3px 8px;
+  border-radius: 999px; white-space: nowrap; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Кнопка «Дзе я» */
+.locate-btn {
+  width: 40px; height: 40px; font-size: 18px; cursor: pointer;
+  background: #fff; border: none; border-radius: 6px;
+}

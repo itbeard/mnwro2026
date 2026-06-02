@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="be">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Мапа мерапрыемства — Замак у Алясьніцы</title>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Нашыя стылі -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <div class="topbar">
+    <div>
+      <h1>🏰 Замак у Алясьніцы</h1>
+      <p class="sub">Мапа мерапрыемства · націсьні зону</p>
+    </div>
+    <button class="toggle-list" id="toggleList">Зоны</button>
+  </div>
+
+  <div class="sheet" id="sheet">
+    <div class="sheet-handle" id="sheetHandle">
+      <span class="bar"></span>
+      <strong>Зоны мерапрыемства</strong>
+      <span class="count" id="zoneCount"></span>
+    </div>
+    <div class="zone-list" id="zoneList"></div>
+  </div>
+
+  <!-- Спачатку дадзеныя зон, потым логіка -->
+  <script src="zones.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
