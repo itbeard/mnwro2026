@@ -53,14 +53,24 @@ function navUrl(lat, lng) {
     : `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
 }
 
+// Цэнтр зоны: для кропкі — самі каардынаты, для палігона — цэнтр межаў.
+function centerOf(z) {
+  if (!isPolygon(z.coords)) return z.coords;
+  let latMin = Infinity, latMax = -Infinity, lngMin = Infinity, lngMax = -Infinity;
+  for (const [la, ln] of z.coords) {
+    if (la < latMin) latMin = la;
+    if (la > latMax) latMax = la;
+    if (ln < lngMin) lngMin = ln;
+    if (ln > lngMax) lngMax = ln;
+  }
+  return [(latMin + latMax) / 2, (lngMin + lngMax) / 2];
+}
+
 function popupHtml(z) {
   const info = z.info ? `<div>${z.info}</div>` : "";
-  // Маршрут прапаноўваем толькі для кропак (не для зон-палігонаў).
-  let route = "";
-  if (!isPolygon(z.coords)) {
-    const [lat, lng] = z.coords;
-    route = `<a class="route-link" href="${navUrl(lat, lng)}" target="_blank" rel="noopener">🧭 Пракласьці маршрут</a>`;
-  }
+  // Маршрут і для кропак, і для зон (для зоны — у яе цэнтр).
+  const [lat, lng] = centerOf(z);
+  const route = `<a class="route-link" href="${navUrl(lat, lng)}" target="_blank" rel="noopener">🧭 Пракласьці маршрут</a>`;
   return `<h3>${z.name}</h3>${info}${route}`;
 }
 
