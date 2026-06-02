@@ -2,12 +2,22 @@
 <html lang="be">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <title>Мапа мерапрыемства — Замак у Алясьніцы</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <title>Закрыццё сезона «Мова Нанова» — Замак у Алясьніцы</title>
+
+  <!-- Колер панэлі браўзера на мабільным (БЧБ чырвоны) -->
+  <meta name="theme-color" content="#ce1720" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 
   <!-- Leaflet -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Шрыфт -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" />
 
   <!-- Нашыя стылі -->
   <link rel="stylesheet" href="styles.css" />
@@ -16,13 +26,14 @@
 
   <div id="map"></div>
 
-  <div class="topbar">
-    <div>
-      <h1>🏰 Замак у Алясьніцы</h1>
-      <p class="sub">Мапа мерапрыемства · націсьні зону</p>
+  <header class="topbar">
+    <img class="logo" src="logo.jpg" alt="Мова Нанова — Уроцлаў" />
+    <div class="title-wrap">
+      <h1>Закрыццё сезона «Мова Нанова»</h1>
+      <p class="sub">Мапа мерапрыемства</p>
     </div>
     <button class="toggle-list" id="toggleList">Зоны</button>
-  </div>
+  </header>
 
   <div class="sheet" id="sheet">
     <div class="sheet-handle" id="sheetHandle">
@@ -31,6 +42,7 @@
       <span class="count" id="zoneCount"></span>
     </div>
     <div class="zone-list" id="zoneList"></div>
+    <div class="sheet-footer">🤍&nbsp;❤️&nbsp;🤍&nbsp;&nbsp;Жыве Беларусь!</div>
   </div>
 
   <!-- Спачатку дадзеныя зон, потым логіка -->

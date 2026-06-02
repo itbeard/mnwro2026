@@ -1,8 +1,16 @@
 :root {
-  --accent: #b5402a;        /* асноўны колер інтэрфейсу */
+  --bcb-red: #ce1720;        /* чырвоны БЧБ */
+  --bcb-red-dark: #a8121b;
+  --bcb-red-tint: #fdecec;   /* лёгкі чырвоны фон для націску/навядзення */
+  --accent: var(--bcb-red);  /* асноўны колер інтэрфейсу */
   --panel-bg: #ffffff;
   --text: #1c1c1c;
   --muted: #6b6b6b;
+  --peek: 56px;              /* колькі бачна ніжняй панэлі ў згорнутым стане */
+  --radius: 16px;
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.12);
+  --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.18);
+  --font: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -10,91 +18,147 @@
 html, body {
   margin: 0;
   height: 100%;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font);
   color: var(--text);
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
 }
 
-#map { position: absolute; inset: 0; z-index: 0; }
+#map { position: absolute; inset: 0; z-index: 0; background: #e9e5df; }
 
-/* Шапка */
+/* ===== Шапка ===== */
 .topbar {
   position: absolute; top: 0; left: 0; right: 0; z-index: 1000;
-  background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(6px);
-  padding: 10px 14px; display: flex; align-items: center; gap: 10px;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+  display: flex; align-items: center; gap: 11px;
+  padding: max(10px, env(safe-area-inset-top))
+           max(14px, env(safe-area-inset-right))
+           10px
+           max(14px, env(safe-area-inset-left));
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-sm);
 }
-.topbar h1 { font-size: 16px; margin: 0; font-weight: 700; }
-.topbar .sub { font-size: 12px; color: var(--muted); margin: 0; }
+.title-wrap { min-width: 0; }
+.topbar h1 {
+  font-size: 16px; margin: 0; font-weight: 800; letter-spacing: -0.01em;
+  line-height: 1.2;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.topbar .sub { font-size: 12px; color: var(--muted); margin: 2px 0 0; }
 
-/* Кнопка «Зоны» */
+/* Лагатып «Мова Нанова» */
+.logo {
+  flex: 0 0 auto; width: 42px; height: 42px; border-radius: 50%;
+  object-fit: cover; box-shadow: var(--shadow-sm);
+}
+
+/* ===== Кнопка «Зоны» ===== */
 .toggle-list {
-  margin-left: auto; border: none; background: var(--accent); color: #fff;
-  padding: 9px 14px; border-radius: 999px; font-size: 14px; font-weight: 600;
-  cursor: pointer; white-space: nowrap;
+  margin-left: auto; border: none; cursor: pointer; white-space: nowrap;
+  background: var(--bcb-red); color: #fff;
+  padding: 10px 18px; border-radius: 999px; font: 600 14px var(--font);
+  box-shadow: 0 3px 10px rgba(206, 23, 32, 0.35);
+  transition: transform 0.12s ease, background 0.15s ease;
 }
+.toggle-list:hover { background: var(--bcb-red-dark); }
+.toggle-list:active { transform: scale(0.95); }
 
-/* Ніжняя панэль са сьпісам зон */
+/* ===== Ніжняя панэль са сьпісам зон ===== */
 .sheet {
   position: absolute; left: 0; right: 0; bottom: 0; z-index: 1000;
-  background: var(--panel-bg); border-radius: 16px 16px 0 0;
-  box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.2);
-  transform: translateY(calc(100% - 54px));
-  transition: transform 0.28s ease;
-  max-height: 70vh; display: flex; flex-direction: column;
+  background: var(--panel-bg);
+  border-radius: var(--radius) var(--radius) 0 0;
+  box-shadow: var(--shadow-md);
+  transform: translateY(calc(100% - var(--peek) - env(safe-area-inset-bottom)));
+  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  max-height: 78vh; display: flex; flex-direction: column;
 }
 .sheet.open { transform: translateY(0); }
+
 .sheet-handle {
-  padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px;
-  border-bottom: 1px solid #eee; position: relative;
+  flex: 0 0 auto; padding: 16px 16px 12px; cursor: pointer;
+  display: flex; align-items: center; gap: 10px; position: relative;
+  border-bottom: 1px solid #f0eded;
 }
 .sheet-handle .bar {
-  width: 36px; height: 5px; background: #ccc; border-radius: 3px;
-  position: absolute; left: 0; right: 0; top: 6px; margin: 0 auto;
+  width: 40px; height: 5px; background: var(--bcb-red); border-radius: 3px;
+  position: absolute; left: 0; right: 0; top: 7px; margin: 0 auto; opacity: 0.85;
 }
-.sheet-handle strong { font-size: 15px; }
-.sheet-handle .count { color: var(--muted); font-size: 13px; }
+.sheet-handle strong { font-size: 16px; font-weight: 800; }
+.sheet-handle .count { color: var(--muted); font-size: 13px; font-weight: 600; }
 
-.zone-list { overflow-y: auto; padding: 6px 8px 16px; }
-.zone-item {
-  display: flex; align-items: center; gap: 12px; padding: 11px 12px;
-  border-radius: 12px; cursor: pointer;
+.zone-list {
+  flex: 1 1 auto; min-height: 0;
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain; padding: 6px 8px 8px;
 }
-.zone-item:active, .zone-item:hover { background: #f4f1ee; }
-.zone-item .name { font-weight: 600; font-size: 15px; }
-.zone-item .meta { font-size: 12.5px; color: var(--muted); }
+.zone-item {
+  display: flex; align-items: center; gap: 12px; padding: 12px;
+  border-radius: 12px; cursor: pointer; min-height: 52px;
+  transition: background 0.12s ease;
+}
+.zone-item:active, .zone-item:hover { background: var(--bcb-red-tint); }
+.zone-item .name { font-weight: 700; font-size: 15px; }
+.zone-item .meta { font-size: 12.5px; color: var(--muted); margin-top: 1px; }
 
 .dot {
-  width: 14px; height: 14px; border-radius: 50%; flex: 0 0 auto;
+  width: 15px; height: 15px; border-radius: 50%; flex: 0 0 auto;
   border: 2px solid #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
 /* Загаловак групы ў сьпісе зон */
 .zone-group {
-  padding: 12px 12px 4px; font-size: 12px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted);
+  padding: 14px 12px 5px; font-size: 12px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.05em; color: var(--bcb-red);
 }
 
-/* Легенда катэгорый */
-.legend {
-  background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(6px);
-  padding: 8px 10px; border-radius: 10px; box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
-  font-size: 12.5px; line-height: 1.5; max-width: 60vw;
+/* Подпіс унізе панэлі */
+.sheet-footer {
+  flex: 0 0 auto; text-align: center;
+  padding: 12px 16px max(14px, env(safe-area-inset-bottom));
+  font-size: 13px; font-weight: 700; color: var(--muted);
+  border-top: 1px solid #f0eded; letter-spacing: 0.01em;
 }
-.legend-row { display: flex; align-items: center; gap: 7px; white-space: nowrap; }
+
+/* ===== Легенда катэгорый ===== */
+.legend {
+  background: rgba(255, 255, 255, 0.94);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  padding: 9px 11px; border-radius: 12px; box-shadow: var(--shadow-sm);
+  font-size: 12.5px; line-height: 1.55; max-width: 56vw; font-weight: 600;
+}
+.legend-row { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
 .legend-row .dot { width: 11px; height: 11px; }
 
-/* Поп-апы */
-.leaflet-popup-content { margin: 12px 14px; font-size: 14px; line-height: 1.4; }
-.leaflet-popup-content h3 { margin: 0 0 4px; font-size: 15px; }
+/* Падымаем кантролі вышэй за згорнутую панэль */
+.leaflet-bottom { bottom: calc(var(--peek) + env(safe-area-inset-bottom) + 8px); }
 
-/* Подпіс вобласьці (палігона) на мапе */
+/* Кантролі leaflet у тэме БЧБ */
+.leaflet-bar, .leaflet-control-layers {
+  border: none !important; border-radius: 10px !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+.leaflet-bar a { background: #fff; color: var(--bcb-red); font-weight: 700; }
+.leaflet-bar a:hover { background: var(--bcb-red-tint); color: var(--bcb-red-dark); }
+
+/* ===== Поп-апы ===== */
+.leaflet-popup-content-wrapper { border-radius: 12px; box-shadow: var(--shadow-md); }
+.leaflet-popup-content { margin: 13px 15px; font-size: 14px; line-height: 1.45; }
+.leaflet-popup-content h3 {
+  margin: 0 0 5px; font-size: 15.5px; font-weight: 800; color: var(--bcb-red);
+}
+
+/* Подпіс вобласьці (палігона) на мапе — колер зоны inline, не чапаем */
 .zone-label {
-  color: #fff; font-weight: 600; font-size: 12px; padding: 3px 8px;
-  border-radius: 999px; white-space: nowrap; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  color: #fff; font-weight: 700; font-size: 12px; padding: 3px 9px;
+  border-radius: 999px; white-space: nowrap; box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
 }
 
 /* Кнопка «Дзе я» */
 .locate-btn {
-  width: 40px; height: 40px; font-size: 18px; cursor: pointer;
-  background: #fff; border: none; border-radius: 6px;
+  width: 44px; height: 44px; font-size: 19px; cursor: pointer;
+  background: #fff; border: none; border-radius: 10px; box-shadow: var(--shadow-sm);
+  display: flex; align-items: center; justify-content: center;
 }
+.locate-btn:active { background: var(--bcb-red-tint); }
