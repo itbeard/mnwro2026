@@ -66,6 +66,7 @@ function popupHtml(z) {
 
 /* --- 3) Малюем зоны --- */
 const markersById = {};
+const pointLayers = [];   // кропкі — каб потым падняць іх над палігонамі
 
 ZONES.forEach((z, i) => {
   const color = zoneColor(z);
@@ -89,11 +90,16 @@ ZONES.forEach((z, i) => {
       radius: 11, color: '#fff', weight: 2,
       fillColor: color, fillOpacity: 1
     });
+    pointLayers.push(layer);
   }
   layer.bindPopup(popupHtml(z));
   layer.addTo(map);
   markersById[i] = layer;
 });
+
+// Кропкі заўжды над палігонамі (інакш, напр., біяпрыбіральні
+// хаваюцца пад зонай намётаў).
+pointLayers.forEach((p) => p.bringToFront());
 
 /* --- 4) Сьпіс зон (ніжняя панэль), згрупаваны па катэгорыях --- */
 const zoneListEl = document.getElementById('zoneList');
