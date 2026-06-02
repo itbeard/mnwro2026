@@ -42,9 +42,26 @@ function zoneColor(z) {
   return CATEGORIES[catKeyOf(z)].color;
 }
 
+// Спасылка на маршрут праз штатны навігатар тэлефона.
+// iOS — Apple Maps, астатнія — Google Maps (адкрывае дадатак, калі ўсталяваны).
+function navUrl(lat, lng) {
+  const ua = navigator.userAgent || "";
+  const isIOS = /iPhone|iPad|iPod/.test(ua) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  return isIOS
+    ? `https://maps.apple.com/?daddr=${lat},${lng}&dirflg=d`
+    : `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+}
+
 function popupHtml(z) {
   const info = z.info ? `<div>${z.info}</div>` : "";
-  return `<h3>${z.name}</h3>${info}`;
+  // Маршрут прапаноўваем толькі для кропак (не для зон-палігонаў).
+  let route = "";
+  if (!isPolygon(z.coords)) {
+    const [lat, lng] = z.coords;
+    route = `<a class="route-link" href="${navUrl(lat, lng)}" target="_blank" rel="noopener">🧭 Пракласьці маршрут</a>`;
+  }
+  return `<h3>${z.name}</h3>${info}${route}`;
 }
 
 /* --- 3) Малюем зоны --- */
@@ -57,15 +74,16 @@ ZONES.forEach((z, i) => {
     layer = L.polygon(z.coords, {
       color: color, weight: 2, fillColor: color, fillOpacity: 0.30
     });
-    // подпіс пасярэдзіне вобласьці
-    L.marker(layer.getBounds().getCenter(), {
+    // подпіс пасярэдзіне вобласьці — клік па ім таксама адкрывае падказку
+    const center = layer.getBounds().getCenter();
+    L.marker(center, {
       icon: L.divIcon({
         className: '',
         html: `<div class="zone-label" style="background:${color}">${z.name}</div>`,
         iconSize: null
       }),
-      interactive: false
-    }).addTo(map);
+      interactive: true
+    }).addTo(map).on('click', () => layer.openPopup(center));
   } else {
     layer = L.circleMarker(z.coords, {
       radius: 11, color: '#fff', weight: 2,
@@ -133,10 +151,61 @@ legend.addTo(map);
 
 /* --- 6) Ніжняя панэль: адкрыць/закрыць --- */
 const sheet = document.getElementById('sheet');
+const sheetHandle = document.getElementById('sheetHandle');
 function closeSheet() { sheet.classList.remove('open'); }
 function toggleSheet() { sheet.classList.toggle('open'); }
 document.getElementById('toggleList').addEventListener('click', toggleSheet);
-document.getElementById('sheetHandle').addEventListener('click', toggleSheet);
+
+/* Перацягванне шторкі пальцам уверх/уніз (pointer events = тач + мыш) */
+function sheetTranslateY() {
+  const t = getComputedStyle(sheet).transform;
+  if (!t || t === 'none') return 0;
+  try { return new DOMMatrixReadOnly(t).m42; }
+  catch (e) {
+    const m = t.match(/matrix[^(]*\(([^)]+)\)/);
+    return m ? parseFloat(m[1].split(',').pop()) : 0;
+  }
+}
+
+let closedY = sheetTranslateY();   // зрух панэлі ў згорнутым стане (px)
+let dragging = false, startY = 0, startT = 0, curT = 0, moved = false;
+
+sheetHandle.addEventListener('pointerdown', (e) => {
+  dragging = true; moved = false;
+  startY = e.clientY;
+  if (sheet.classList.contains('open')) {
+    startT = 0;
+  } else {
+    const m = sheetTranslateY();
+    if (m) closedY = m;
+    startT = closedY;
+  }
+  curT = startT;
+  sheet.style.transition = 'none';
+  sheetHandle.setPointerCapture(e.pointerId);
+});
+
+sheetHandle.addEventListener('pointermove', (e) => {
+  if (!dragging) return;
+  const dy = e.clientY - startY;
+  if (Math.abs(dy) > 4) moved = true;
+  curT = Math.min(Math.max(startT + dy, 0), closedY);
+  sheet.style.transform = `translateY(${curT}px)`;
+});
+
+function endDrag() {
+  if (!dragging) return;
+  dragging = false;
+  sheet.style.transition = '';      // вяртаем плаўную анімацыю
+  sheet.style.transform = '';       // далей становішчам кіруе клас .open
+  if (!moved) {
+    toggleSheet();                  // звычайны тап — проста пераключыць
+  } else {
+    sheet.classList.toggle('open', curT < closedY * 0.5);
+  }
+}
+sheetHandle.addEventListener('pointerup', endDrag);
+sheetHandle.addEventListener('pointercancel', endDrag);
 
 /* --- 7) «Дзе я» — GPS карыстальніка --- */
 const LocateControl = L.Control.extend({
