@@ -240,6 +240,32 @@ details.acc > summary:hover { background: var(--bcb-red-tint); }
 .tech-block ul ul li { color: var(--muted); }
 .bang { color: var(--bcb-red); font-weight: 800; }
 
+/* ===== Карысныя рэсурсы ===== */
+.res-list { display: grid; gap: 10px; margin-top: 4px; }
+.res-item {
+  display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink);
+  background: #fff; border: 1px solid var(--hairline); border-radius: var(--radius-md);
+  padding: 13px 14px; box-shadow: var(--shadow-sm); transition: background .15s, transform .12s, border-color .15s;
+}
+.res-item:hover { background: var(--bcb-red-tint); border-color: var(--bcb-red); }
+.res-item:active { transform: scale(.98); }
+.res-ic { font-size: 22px; flex: 0 0 auto; }
+.res-txt { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.res-title { font-weight: 800; font-size: 14.5px; line-height: 1.3; }
+.res-url { font-size: 12.5px; font-weight: 700; color: var(--bcb-red); word-break: break-word; }
+.res-go { flex: 0 0 auto; color: var(--bcb-red); font-size: 18px; font-weight: 800; }
+
+.res-events {
+  background: var(--bcb-red-tint); border: 1px solid var(--hairline); border-radius: var(--radius-md);
+  padding: 11px 14px;
+}
+.res-events-h { margin: 0 0 6px; font-size: 12.5px; font-weight: 800; color: var(--bcb-red-dark); }
+.res-events .event { font-size: 14px; font-weight: 700; padding: 5px 0; border-top: 1px solid rgba(168,18,27,.15); }
+.res-events .event:first-of-type { border-top: none; }
+.res-events .event-date {
+  display: inline-block; min-width: 86px; font-weight: 800; color: var(--bcb-red-dark);
+}
+
 /* Падвал */
 .foot {
   text-align: center; padding: 26px 12px 12px; color: var(--muted);
