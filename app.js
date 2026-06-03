@@ -177,8 +177,12 @@ legend.addTo(map);
 /* --- 6) Ніжняя панэль: адкрыць/закрыць --- */
 const sheet = document.getElementById('sheet');
 const sheetHandle = document.getElementById('sheetHandle');
-function closeSheet() { sheet.classList.remove('open'); }
-function toggleSheet() { sheet.classList.toggle('open'); }
+// Скід пошуку кожны раз, калі панэль зачыняецца (любым спосабам)
+function syncSearchClosed() {
+  if (!sheet.classList.contains('open') && typeof resetZoneSearch === 'function') resetZoneSearch();
+}
+function closeSheet() { sheet.classList.remove('open'); syncSearchClosed(); }
+function toggleSheet() { sheet.classList.toggle('open'); syncSearchClosed(); }
 document.getElementById('toggleList').addEventListener('click', toggleSheet);
 
 /* Перацягванне шторкі пальцам уверх/уніз (pointer events = тач + мыш) */
@@ -227,6 +231,7 @@ function endDrag() {
     toggleSheet();                  // звычайны тап — проста пераключыць
   } else {
     sheet.classList.toggle('open', curT < closedY * 0.5);
+    syncSearchClosed();
   }
 }
 sheetHandle.addEventListener('pointerup', endDrag);
@@ -274,6 +279,7 @@ map.on('locationerror', () => {
   const input = document.getElementById('zoneSearch');
   const clear = document.getElementById('zoneSearchClear');
   const list  = document.getElementById('zoneList');
+  const count = document.getElementById('zoneCount');
   if (!input || !list) return;
 
   // плашка «нічога не знойдзена»
@@ -285,14 +291,14 @@ map.on('locationerror', () => {
     const q = input.value.trim().toLowerCase();
     clear.hidden = !q;
     const children = Array.from(list.children).filter(el => el !== empty);
-    let anyVisible = false;
+    let anyVisible = false, visibleCount = 0;
     // 1) паказваем/хаваем кожны радок зоны
     children.forEach(el => {
       if (!el.classList.contains('zone-item')) return;
       const text = el.textContent.toLowerCase();
       const show = !q || text.includes(q);
       el.style.display = show ? '' : 'none';
-      if (show) anyVisible = true;
+      if (show) { anyVisible = true; visibleCount++; }
     });
     // 2) хаваем загаловак групы, калі ўсе яе радкі схаваныя
     children.forEach((el, idx) => {
@@ -306,7 +312,16 @@ map.on('locationerror', () => {
       el.style.display = hasVisible ? '' : 'none';
     });
     empty.hidden = anyVisible;
+    // 3) лічба ў загалоўку слайдэра — адлюстроўвае знойдзенае
+    if (count) count.textContent = `(${q ? visibleCount : ZONES.length})`;
   }
   input.addEventListener('input', apply);
   clear.addEventListener('click', () => { input.value = ''; apply(); input.focus(); });
+
+  // Скід пошуку (выклікаецца пры закрыцьці слайдэра)
+  resetZoneSearch = function () {
+    if (!input.value) return;
+    input.value = '';
+    apply();
+  };
 })();
