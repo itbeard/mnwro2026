@@ -52,21 +52,16 @@ body {
   margin-left: auto; flex: 0 0 auto;
   display: flex; align-items: center; gap: 8px;
 }
-/* «Праграма» — другасная (контурная) кнопка */
-.btn-ghost {
+/* «Праграма» — кругавая іконка-кнопка */
+.icon-ghost {
+  width: 42px; height: 42px; border-radius: 50%;
   border: 1.5px solid var(--bcb-red); background: #fff; color: var(--bcb-red);
-  padding: 8px 13px; border-radius: 999px; font: 700 13.5px var(--font);
-  white-space: nowrap; text-decoration: none; cursor: pointer;
-  transition: background 0.15s ease;
+  font-size: 18px; line-height: 1; text-decoration: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s ease, transform .12s ease;
 }
-.btn-ghost:hover { background: var(--bcb-red-tint); }
-.btn-ghost:active { background: var(--bcb-red-tint); transform: scale(0.96); }
-
-/* Кампактныя кнопкі-іконкі ў шапцы (☰ і 📋) */
-.topbar-actions .btn-icon {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 38px; height: 38px; padding: 0; font-size: 17px; line-height: 1;
-}
+.icon-ghost:hover  { background: var(--bcb-red-tint); }
+.icon-ghost:active { background: var(--bcb-red-tint); transform: scale(.95); }
 .topbar h1 {
   font-size: 16px; margin: 0; font-weight: 800; letter-spacing: -0.01em;
   line-height: 1.2;
@@ -207,3 +202,31 @@ body {
   display: flex; align-items: center; justify-content: center;
 }
 .locate-btn:active { background: var(--bcb-red-tint); }
+
+/* ===== Брэндаваны сплэш пры загрузцы ===== */
+#splash {
+  position: fixed; inset: 0; z-index: 3000; background: #fff;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+  transition: opacity .5s ease;
+}
+#splash.hide { opacity: 0; pointer-events: none; }
+.splash-logo { width: 92px; height: 92px; border-radius: 50%; box-shadow: var(--shadow-md); animation: bob 1.4s ease-in-out infinite; }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+.splash-name { font-size: 20px; font-weight: 800; letter-spacing: -.01em; }
+.splash-sub  { font-size: 13px; font-weight: 600; color: var(--muted); margin-top: -6px; }
+.splash-hearts { font-size: 18px; letter-spacing: 3px; margin-top: 2px; }
+
+/* ===== Пошук зоны ў шторцы ===== */
+.search { flex: 0 0 auto; padding: 10px 14px 6px; }
+.search-in { display: flex; align-items: center; gap: 8px; background: #f4f1ee; border-radius: 12px; padding: 9px 12px; }
+.search-in input { flex: 1 1 auto; min-width: 0; border: none; background: transparent; font: 600 14px var(--font); color: var(--text); outline: none; }
+.search-in input::placeholder { color: #9a948c; font-weight: 600; }
+.search-clear { border: none; background: transparent; color: var(--muted); font-size: 16px; cursor: pointer; padding: 2px; }
+.zone-empty { padding: 22px 16px; text-align: center; color: var(--muted); font-weight: 600; font-size: 14px; }
+
+/* ===== Пульс маркера пры выбары зоны ===== */
+.pulse-ring { width: 18px; height: 18px; border-radius: 50%; background: rgba(206, 23, 32, .55); animation: mnpulse 1.1s ease-out forwards; }
+@keyframes mnpulse {
+  0%   { transform: scale(.4);  opacity: 1; box-shadow: 0 0 0 0  rgba(206, 23, 32, .45); }
+  100% { transform: scale(2.6); opacity: 0; box-shadow: 0 0 0 24px rgba(206, 23, 32, 0); }
+}

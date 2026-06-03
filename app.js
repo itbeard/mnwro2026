@@ -144,6 +144,15 @@ Object.keys(CATEGORIES).forEach((catKey) => {
 function focusZone(i) {
   const layer = markersById[i];
   const z = ZONES[i];
+
+  // Кароткі пульс на месцы зоны — падказвае, куды глядзець
+  const c = isPolygon(z.coords) ? layer.getBounds().getCenter() : z.coords;
+  const ring = L.marker(c, {
+    icon: L.divIcon({ className: '', html: '<div class="pulse-ring"></div>', iconSize: [18, 18], iconAnchor: [9, 9] }),
+    interactive: false
+  }).addTo(map);
+  setTimeout(() => map.removeLayer(ring), 1150);
+
   if (isPolygon(z.coords)) {
     map.flyToBounds(layer.getBounds().pad(0.4), { maxZoom: 18 });
   } else {
@@ -249,3 +258,55 @@ map.on('locationfound', (e) => {
 map.on('locationerror', () => {
   alert('Не атрымалася вызначыць месцазнаходжаньне. Дазвольце доступ да геалякацыі ў браўзеры.');
 });
+
+/* --- 8) Сплэш: знікае сам праз 1.3 с (ці па тапе) --- */
+(function () {
+  const splash = document.getElementById('splash');
+  if (!splash) return;
+  let done = false;
+  const hide = () => { if (done) return; done = true; splash.classList.add('hide'); setTimeout(() => splash.remove(), 520); };
+  setTimeout(hide, 1300);
+  splash.addEventListener('click', hide);
+})();
+
+/* --- 9) Пошук па сьпісе зон --- */
+(function () {
+  const input = document.getElementById('zoneSearch');
+  const clear = document.getElementById('zoneSearchClear');
+  const list  = document.getElementById('zoneList');
+  if (!input || !list) return;
+
+  // плашка «нічога не знойдзена»
+  const empty = document.createElement('div');
+  empty.className = 'zone-empty'; empty.textContent = 'Нічога не знойдзена 🤍'; empty.hidden = true;
+  list.appendChild(empty);
+
+  function apply() {
+    const q = input.value.trim().toLowerCase();
+    clear.hidden = !q;
+    const children = Array.from(list.children).filter(el => el !== empty);
+    let anyVisible = false;
+    // 1) паказваем/хаваем кожны радок зоны
+    children.forEach(el => {
+      if (!el.classList.contains('zone-item')) return;
+      const text = el.textContent.toLowerCase();
+      const show = !q || text.includes(q);
+      el.style.display = show ? '' : 'none';
+      if (show) anyVisible = true;
+    });
+    // 2) хаваем загаловак групы, калі ўсе яе радкі схаваныя
+    children.forEach((el, idx) => {
+      if (!el.classList.contains('zone-group')) return;
+      let hasVisible = false;
+      for (let j = idx + 1; j < children.length; j++) {
+        const n = children[j];
+        if (n.classList.contains('zone-group')) break;
+        if (n.classList.contains('zone-item') && n.style.display !== 'none') { hasVisible = true; break; }
+      }
+      el.style.display = hasVisible ? '' : 'none';
+    });
+    empty.hidden = anyVisible;
+  }
+  input.addEventListener('input', apply);
+  clear.addEventListener('click', () => { input.value = ''; apply(); input.focus(); });
+})();
