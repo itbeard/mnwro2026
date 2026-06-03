@@ -138,21 +138,18 @@ body {
   text-transform: uppercase; letter-spacing: 0.05em; color: var(--bcb-red);
 }
 
-/* Подпіс унізе панэлі */
+/* Подпіс унізе панэлі (сардэчкі + спасылка — заўжды ў адзін радок) */
 .sheet-footer {
-  flex: 0 0 auto;
-  display: flex; flex-direction: column; align-items: center; gap: 9px;
-  padding: 13px 16px max(14px, env(safe-area-inset-bottom));
+  flex: 0 0 auto; text-align: center; white-space: nowrap;
+  padding: 13px 12px max(14px, env(safe-area-inset-bottom));
   border-top: 1px solid #f0eded;
+  font-size: clamp(11px, 3.2vw, 13px);   /* зьмяншаецца на вузкіх экранах, каб улезла */
 }
 .tg-link {
-  color: var(--bcb-red); font-weight: 700; font-size: 13.5px;
+  color: var(--bcb-red); font-weight: 700;
   text-decoration: underline; text-underline-offset: 2px;
 }
 .tg-link:active { color: var(--bcb-red-dark); }
-.footer-slogan {
-  font-size: 13px; font-weight: 700; color: var(--muted); letter-spacing: 0.01em;
-}
 
 /* ===== Легенда катэгорый ===== */
 .legend {
