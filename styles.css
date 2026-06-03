@@ -45,7 +45,22 @@ body {
   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
   box-shadow: var(--shadow-sm);
 }
-.title-wrap { min-width: 0; }
+.title-wrap { flex: 1 1 auto; min-width: 0; }
+
+/* Кнопкі-дзеянні справа ў шапцы */
+.topbar-actions {
+  margin-left: auto; flex: 0 0 auto;
+  display: flex; align-items: center; gap: 8px;
+}
+/* «Праграма» — другасная (контурная) кнопка */
+.btn-ghost {
+  border: 1.5px solid var(--bcb-red); background: #fff; color: var(--bcb-red);
+  padding: 8px 13px; border-radius: 999px; font: 700 13.5px var(--font);
+  white-space: nowrap; text-decoration: none; cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn-ghost:hover { background: var(--bcb-red-tint); }
+.btn-ghost:active { background: var(--bcb-red-tint); transform: scale(0.96); }
 .topbar h1 {
   font-size: 16px; margin: 0; font-weight: 800; letter-spacing: -0.01em;
   line-height: 1.2;
@@ -125,10 +140,18 @@ body {
 
 /* Подпіс унізе панэлі */
 .sheet-footer {
-  flex: 0 0 auto; text-align: center;
-  padding: 12px 16px max(14px, env(safe-area-inset-bottom));
-  font-size: 13px; font-weight: 700; color: var(--muted);
-  border-top: 1px solid #f0eded; letter-spacing: 0.01em;
+  flex: 0 0 auto;
+  display: flex; flex-direction: column; align-items: center; gap: 9px;
+  padding: 13px 16px max(14px, env(safe-area-inset-bottom));
+  border-top: 1px solid #f0eded;
+}
+.tg-link {
+  color: var(--bcb-red); font-weight: 700; font-size: 13.5px;
+  text-decoration: underline; text-underline-offset: 2px;
+}
+.tg-link:active { color: var(--bcb-red-dark); }
+.footer-slogan {
+  font-size: 13px; font-weight: 700; color: var(--muted); letter-spacing: 0.01em;
 }
 
 /* ===== Легенда катэгорый ===== */
