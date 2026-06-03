@@ -61,6 +61,12 @@ body {
 }
 .btn-ghost:hover { background: var(--bcb-red-tint); }
 .btn-ghost:active { background: var(--bcb-red-tint); transform: scale(0.96); }
+
+/* Кампактныя кнопкі-іконкі ў шапцы (☰ і 📋) */
+.topbar-actions .btn-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; padding: 0; font-size: 17px; line-height: 1;
+}
 .topbar h1 {
   font-size: 16px; margin: 0; font-weight: 800; letter-spacing: -0.01em;
   line-height: 1.2;
