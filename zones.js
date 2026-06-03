@@ -35,7 +35,7 @@ const CATEGORIES = {
 };
 
 const ZONES = [
-  /* --- Актыўнасьці --- */  
+  /* --- Актыўнасці --- */
   {
     name: "Дзядзінец",
     category: "activity",
