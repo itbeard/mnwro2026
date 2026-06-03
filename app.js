@@ -68,10 +68,14 @@ function centerOf(z) {
 
 function popupHtml(z) {
   const info = z.info ? `<div>${z.info}</div>` : "";
+  // Дадатковая спасылка зоны (напр. старонка майстар-класа) — на гэтым жа сайце.
+  const link = z.link
+    ? `<a class="info-link" href="${z.link.href}">${z.link.label}</a>`
+    : "";
   // Маршрут і для кропак, і для зон (для зоны — у яе цэнтр).
   const [lat, lng] = centerOf(z);
   const route = `<a class="route-link" href="${navUrl(lat, lng)}" target="_blank" rel="noopener">🧭 Пракласьці маршрут</a>`;
-  return `<h3>${z.name}</h3>${info}${route}`;
+  return `<h3>${z.name}</h3>${info}<div class="pop-links">${link}${route}</div>`;
 }
 
 /* --- 3) Малюем зоны --- */

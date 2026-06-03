@@ -180,13 +180,25 @@ body {
 .leaflet-popup-content h3 {
   margin: 0 0 5px; font-size: 15.5px; font-weight: 800; color: var(--bcb-red);
 }
+/* Спасылкі ў поп-апе — слупком пад апісаньнем */
+.pop-links { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 10px; }
 /* Кнопка «Пракласьці маршрут» у поп-апе */
 .route-link {
-  display: inline-flex; align-items: center; gap: 6px; margin-top: 10px;
+  display: inline-flex; align-items: center; gap: 6px;
   background: var(--bcb-red); color: #fff !important; text-decoration: none;
   padding: 8px 14px; border-radius: 999px; font-weight: 700; font-size: 13.5px;
 }
 .route-link:active { background: var(--bcb-red-dark); }
+/* Дадатковая спасылка зоны (старонка майстар-класа) — чырвоны контур */
+.info-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #fff; color: var(--bcb-red) !important; text-decoration: none;
+  border: 1.5px solid var(--bcb-red);
+  padding: 7px 13px; border-radius: 999px; font-weight: 700; font-size: 13.5px;
+  transition: background .15s ease;
+}
+.info-link:hover  { background: var(--bcb-red-tint); }
+.info-link:active { background: var(--bcb-red-tint); transform: scale(.97); }
 
 /* Подпіс вобласьці (палігона) на мапе — колер зоны inline, не чапаем */
 .zone-label {
