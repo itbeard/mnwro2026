@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" />
 
-  <link rel="stylesheet" href="luk.css?v=1" />
+  <link rel="stylesheet" href="luk.css?v=2" />
 </head>
 
 <body>
@@ -32,10 +32,11 @@
     <a href="#luk">Лук</a>
     <a href="#strala">Страла</a>
     <a href="#typy">Тыпы лукаў</a>
-    <a href="#prahrama">Сёньня</a>
-    <a href="#abstalavanne">Абсталяваньне</a>
+    <a href="#prahrama">Сёння</a>
+    <a href="#abstalavanne">Абсталяванне</a>
     <a href="#bjaspeka">Бяспека</a>
     <a href="#tehnika">Тэхніка</a>
+    <a href="#resursy">Рэсурсы</a>
   </nav>
 
   <main>
@@ -44,15 +45,16 @@
     <div class="hero">
       <div class="big">🌿🏹</div>
       <h2>Уводзіны ў стральбу з лука</h2>
-      <p>Старажытнае мастацтва і сучасны спорт. Разьбярэмся, з чаго складаецца лук і страла,
-        якія бываюць лукі, і кранем тэхніку ды бяспеку. Націскай на схемы — паглядзім, што ёсьць што.</p>
+      <p>Старажытнае мастацтва і сучасны спорт. Разгледзім, якія бываюць лукі, з чаго яны складаюцца,
+        якія стрэлы выкарыстоўваюцца, а таксама кранем тэхніку і правілы бяспекі.
+        Націскай на схемы — паглядзім, што ёсць што.</p>
     </div>
 
     <!-- ЛУК -->
     <section id="luk">
       <p class="eyebrow">Тэорыя лука</p>
       <h2 class="section-title">З чаго складаецца лук</h2>
-      <p class="lead">Націсьні на кропку на схеме або на назву ўнізе.</p>
+      <p class="lead">Націсні на кропку на схеме або на назву ўнізе.</p>
 
       <div class="diagram-card">
         <div class="diagram-head">
@@ -71,22 +73,20 @@
               fill="none" stroke="#2b2b2b" stroke-width="11" stroke-linecap="round" />
             <!-- цеціва -->
             <line class="part" data-part="string" x1="206" y1="62" x2="206" y2="498" stroke="#555" stroke-width="2.6" />
-            <!-- рукаяць -->
+            <!-- ручка / дзяржанне -->
             <rect class="part" data-part="riser" x="139" y="231" width="23" height="98" rx="11" fill="#2b2b2b" />
             <rect class="part" data-part="riser" x="158" y="259" width="13" height="46" rx="7" fill="#3a3a3a" />
 
-            <!-- спартыўны абвес: візір -->
+            <!-- спартыўны абвес: прыцэл -->
             <g class="gear-part">
               <path data-part="sight" d="M140 250 H99 V292" fill="none" stroke="#8a94a6" stroke-width="4"
                 stroke-linecap="round" stroke-linejoin="round" />
               <circle data-part="sight" cx="96" cy="276" r="9" fill="none" stroke="#8a94a6" stroke-width="4" />
             </g>
-            <!-- спартыўны абвес: стабілізатар + уцяжарвальнік -->
+            <!-- спартыўны абвес: стабілізатары -->
             <g class="gear-part">
-              <line data-part="stab" x1="142" y1="314" x2="56" y2="350" stroke="#8a94a6" stroke-width="7"
+              <line data-part="stab" x1="142" y1="314" x2="50" y2="352" stroke="#8a94a6" stroke-width="7"
                 stroke-linecap="round" />
-              <rect data-part="weight" x="34" y="346" width="24" height="16" rx="6" fill="#5b6577"
-                transform="rotate(-22 46 354)" />
             </g>
 
             <!-- страла на паліцы -->
@@ -104,12 +104,29 @@
       </div>
 
       <details class="acc">
+        <summary>🧩 Дадатковыя элементы <span class="chev">▸</span></summary>
+        <div class="acc-body">
+          <ul class="deflist">
+            <li><b>Абмотка цецівы</b> <span class="term">(bowstring serving)</span> — нітка на цеціве, што бароніць яе ад зносу.</li>
+            <li><b>Сядло</b> <span class="term">(nocking point)</span> — пазнака на цеціве, куды заўжды ставім хвосцік стралы.</li>
+            <li><b>Глушыцелі вібрацый / дэмпферы</b> <span class="term">(dampener · tłumik)</span> — гумкі для плячэй або накладкі / «кошкі» на цеціве.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc">
         <summary>📏 Асноўныя характарыстыкі <span class="chev">▸</span></summary>
         <div class="acc-body">
           <ul class="deflist">
-            <li><b>Магутнасьць нацягваньня цецівы</b> — колькі фунтаў трэба, каб нацягнуць лук (напр. 30 lbs).</li>
-            <li><b>Даўжыня лука</b> — вымяраецца ў цалях (напр. 68'').</li>
-            <li><b>Астатняе</b> — матэрыял плячэй, сістэма мацаваньня, прызначэньне.</li>
+            <li><b>Сіла нацяжэння цецівы</b> — колькі фунтаў трэба, каб нацягнуць лук (напр. 35 lbs).</li>
+            <li><b>Даўжыня лука</b> — у цалях (напр. 60'').</li>
+            <li><b>LH / RH</b> — пад якую руку зроблены лук:
+              <ul style="margin:6px 0 0; padding-left:18px;">
+                <li><b>RH · Right Hand</b> — для праўшы: лук трымаем левай рукой, цеціву нацягваем правай.</li>
+                <li><b>LH · Left Hand</b> — для ляўшы: лук трымаем правай рукой, цеціву нацягваем левай.</li>
+              </ul>
+            </li>
+            <li><b>Іншыя параметры</b> — матэрыял плячэй, сістэма мацавання, прызначэнне.</li>
           </ul>
         </div>
       </details>
@@ -119,17 +136,17 @@
     <section id="strala">
       <p class="eyebrow">Тэорыя стрэл</p>
       <h2 class="section-title">З чаго складаецца страла</h2>
-      <p class="lead">Націсьні на кропку або на назву ўнізе.</p>
+      <p class="lead">Націсні на кропку або на назву ўнізе.</p>
 
       <div class="diagram-card">
         <div class="canvas arrow" id="arrowCanvas">
           <svg viewBox="0 0 560 150" aria-label="Схема стралы">
-            <!-- древка -->
+            <!-- дрэўка -->
             <line class="part" data-part="shaft" x1="60" y1="75" x2="478" y2="75" stroke="#c98a4a"
               stroke-width="6" stroke-linecap="round" />
             <!-- наканечнік -->
             <polygon class="part" data-part="point" points="28,75 70,66 70,84" fill="#2b2b2b" />
-            <!-- апярэньне -->
+            <!-- апярэнне -->
             <g class="part" data-part="fletch">
               <polygon points="405,73 478,50 486,57 425,76" fill="#ce1720" />
               <polygon points="405,77 478,100 486,93 425,74" fill="#a8121b" />
@@ -150,8 +167,11 @@
       <div class="cards">
         <div class="card">
           <h3>🧱 Матэрыялы стрэл</h3>
-          <p>Дрэва, алюміній, карбон, кампазіт. Падабраныя стрэлы — даўжыня і вага
-            адпавядаюць кожнаму з нашых лукаў.</p>
+          <p>Дрэва, алюміній, карбон, кампазіт.</p>
+        </div>
+        <div class="card">
+          <h3>🎯 Падбор стралы да лука</h3>
+          <p>Даўжыня, гнуткасць <span class="term">(spine)</span> і вага павінны адпавядаць луку.</p>
         </div>
       </div>
     </section>
@@ -162,50 +182,41 @@
       <h2 class="section-title">Якія бываюць лукі</h2>
 
       <ul class="deflist">
-        <li><b>Рэкурсіўны / клясічны лук</b> <span class="term">(recurve / classic bow)</span> — з загнутымі канцамі для большай сілы.</li>
-        <li><b>Доўгі / прамы / традыцыйны</b> <span class="term">(longbow / straight bow)</span> — найстарэйшы, просты профіль.</li>
-        <li><b>Блочны</b> <span class="term">(compound bow)</span> — сучасны лук зь сістэмай блокаў і тросаў, для дакладнасьці і зьніжэньня нагрузкі на стралка.</li>
+        <li><b>Рэкурсіўны</b> <span class="term">(recurve bow, classic bow)</span> — з загнутымі плячыма для большай сілы.</li>
+        <li><b>Традыцыйны / класічны</b> <span class="term">(traditional bow, classic bow)</span> — з прамымі або амаль прамымі плячыма.</li>
+        <li><b>Блочны</b> <span class="term">(compound bow)</span> — лук з сістэмай блокаў і тросаў для дакладнасці і зніжэння нагрузкі на стралка.</li>
       </ul>
 
       <details class="acc">
-        <summary>🏷️ Іншыя тыпізацыі <span class="chev">▸</span></summary>
+        <summary>🏷️ Іншыя класіфікацыі <span class="chev">▸</span></summary>
         <div class="acc-body">
           <ul class="deflist">
-            <li><b>Кампазітны лук</b> — з некалькіх матэрыялаў, гістарычны тып.</li>
-            <li><b>Суцэльны</b> <span class="term">(one-piece bow)</span> — рукаяць і плечы адзіным целам.</li>
-            <li><b>Са здымнымі плячыма</b> <span class="term">(takedown bow)</span> — плечы можна зьняць і памяняць.</li>
-            <li><b>Голы лук</b> <span class="term">(barebow)</span> — без абвесу (без візіра, стабілізатараў).</li>
-            <li><b>Спартыўны</b> <span class="term">(competition bow)</span> — для спаборніцтваў, з абвесам.</li>
-            <li><b>Паляўнічы</b> <span class="term">(hunting bow)</span> — усе з моцай ад 30 фунтаў і вышэй.</li>
+            <li><b>Суцэльны лук</b> <span class="term">(one-piece bow)</span> — ручка і плечы адзіным целам.</li>
+            <li><b>Доўгі лук</b> <span class="term">(long bow)</span> — звычайна 60+ цаляў.</li>
+            <li><b>Са здымнымі плячыма</b> <span class="term">(takedown bow)</span> — плечы можна зняць і памяняць.</li>
+            <li><b>Голы лук</b> <span class="term">(barebow)</span> — без дадатковага абсталявання.</li>
+            <li><b>Спартыўны лук</b> <span class="term">(competition bow)</span> — для спаборніцтваў.</li>
+            <li><b>Паляўнічы лук</b> <span class="term">(hunting bow)</span> — звычайна ад 30 фунтаў і вышэй, можна для палявання.</li>
           </ul>
         </div>
       </details>
     </section>
 
-    <!-- СЁНЬНЯ Ў ПРАГРАМЕ -->
+    <!-- СЁННЯ Ў ПРАГРАМЕ -->
     <section id="prahrama">
-      <p class="eyebrow">Сёньня ў праграме</p>
+      <p class="eyebrow">Сёння ў праграме</p>
       <h2 class="section-title">Нашыя лукі 🎯</h2>
 
       <div class="cards">
         <div class="card">
-          <h3>Core Archery 68'' 30 lbs</h3>
+          <h3>Black Hunter RH Longbow MK 2 60'' 35 lbs</h3>
           <div class="specs">
-            <span class="spec">рэкурсіўны</span>
-            <span class="spec">68''</span>
-            <span class="spec">30 lbs</span>
-          </div>
-          <p>Лук для высокіх пачаткоўцаў — мяккі і дараджальны.</p>
-        </div>
-
-        <div class="card">
-          <h3>Black Hunter LH Longbow MK 2 60'' 35 lbs</h3>
-          <div class="specs">
-            <span class="spec">лонгбоў</span>
+            <span class="spec">класічны</span>
             <span class="spec">60''</span>
             <span class="spec">35 lbs</span>
+            <span class="spec">90 $</span>
           </div>
-          <p>Просты клясічны лук без дадатковых элементаў для прыцэльваньня.</p>
+          <p>Просты класічны лук без дадатковых элементаў для прыцэльвання.</p>
         </div>
 
         <div class="card">
@@ -213,16 +224,18 @@
           <div class="specs">
             <span class="spec">рэкурсіўны · ILF</span>
             <span class="spec">60''</span>
-            <span class="spec">40 lbs</span>
+            <span class="spec">42 lbs</span>
+            <span class="spec">500 $</span>
           </div>
-          <p>Магчымасьць лёгкай зьмены плячэй і гнуткасьць налад.</p>
+          <p>Рэкурсіўны лук з ILF-сістэмай <span class="term">(International Limb Fitting)</span> плячэй:
+            лёгкая замена плячэй і гнуткасць налад.</p>
         </div>
       </div>
     </section>
 
-    <!-- АБСТАЛЯВАНЬНЕ -->
+    <!-- АБСТАЛЯВАННЕ -->
     <section id="abstalavanne">
-      <p class="eyebrow">Дадатковае абсталяваньне</p>
+      <p class="eyebrow">Дадатковае абсталяванне</p>
       <h2 class="section-title">Што бярэм з сабой</h2>
 
       <details class="acc" open>
@@ -231,25 +244,24 @@
           <ul class="checklist">
             <li><span class="ic">🎯</span> Мішэнь</li>
             <li><span class="ic">🎒</span> Калчан</li>
-            <li><span class="ic">🦾</span> Абарона прадплечча (нарукаўнік)</li>
+            <li><span class="ic">🦾</span> Абарона перадплечча / нарукаўнік</li>
             <li><span class="ic">🧤</span> Пальчатка лучніка</li>
-            <li><span class="ic">🪢</span> Прылада для нацягваньня цецівы</li>
-            <li><span class="ic">🐾</span> Скураная «кошка» для палічкі стралы</li>
-            <li><span class="ic">🧴</span> Тлушч для цецівы</li>
+            <li><span class="ic">🧴</span> Тлушч / воск для цецівы</li>
             <li><span class="ic">🟢</span> Фітнэс-гумкі</li>
-            <li class="accent"><span class="ic">📍</span> Месца, дзе страляць!!!</li>
+            <li class="accent"><span class="ic">📍</span> Месца, дзе можна бяспечна страляць!</li>
           </ul>
         </div>
       </details>
 
       <details class="acc">
-        <summary>🔧 Каб наладжваць лук <span class="chev">▸</span></summary>
+        <summary>🧰 Дадатковыя гаджэты <span class="chev">▸</span></summary>
         <div class="acc-body">
           <ul class="checklist">
-            <li><span class="ic">📏</span> Метр у цалях</li>
+            <li><span class="ic">⚖️</span> Ручныя вагі ў фунтах</li>
             <li><span class="ic">📐</span> Лінейка лучніка</li>
-            <li><span class="ic">🪡</span> Абжымнік пункта фіксацыі стралы</li>
-            <li><span class="ic">🪶</span> Станок для наклейваньня пяра</li>
+            <li><span class="ic">🪡</span> Абціскальнік пункта фіксацыі стралы</li>
+            <li><span class="ic">🪶</span> Станок для наклейвання пёраў</li>
+            <li><span class="ic">🧵</span> Ніткі і станок для абмоткі цецівы</li>
           </ul>
         </div>
       </details>
@@ -262,11 +274,11 @@
 
       <div class="safety">
         <div class="rule"><span class="no">🚫</span> Не цэльцеся і не нацягвайце лук у бок чалавека.</div>
-        <div class="rule"><span class="no">🏹</span> Не нацягвайце лук <b>БЕЗ СТРАЛЫ!</b></div>
-        <div class="rule"><span class="no">⬇️</span> Не нацягвайце лук зьверху ўніз!</div>
+        <div class="rule"><span class="no">🏹</span> Не нацягвайце лук <b>без стралы!</b></div>
+        <div class="rule"><span class="no">⬇️</span> Не нацягвайце лук зверху ўніз!</div>
         <div class="rule"><span class="no">🎯</span> Страляйце толькі ў вызначаным кірунку.</div>
         <div class="rule"><span class="no">🚶</span> Не падыходзьце да мішэняў, пакуль усе не спынілі стральбу.</div>
-        <div class="rule"><span class="no">🧤</span> Карыстайцеся ахоўнымі сродкамі: нарукаўнікі, пальчаткі.</div>
+        <div class="rule"><span class="no">🧤</span> Выкарыстоўвайце ахоўныя сродкі: нарукаўнікі, пальчаткі.</div>
       </div>
     </section>
 
@@ -279,9 +291,9 @@
         <summary>🎪 Асноўныя тэхнікі <span class="chev">▸</span></summary>
         <div class="acc-body">
           <ul class="deflist">
-            <li><b>Спартыўная</b> — з візірамі, уцяжарвальнікамі.</li>
-            <li><b>Інстынктыўная</b> — без візіра, «па адчуваньні».</li>
-            <li><b>Традыцыйная</b> — з прыцэльваньнем наканечнікам.</li>
+            <li><b>Спартыўная</b> — з візірамі і стабілізатарамі.</li>
+            <li><b>Традыцыйная</b> — з прыцэльваннем наканечнікам.</li>
+            <li><b>Інстынктыўная</b> — без візіра, «па адчуванні».</li>
           </ul>
         </div>
       </details>
@@ -293,47 +305,47 @@
             <h4>🦶 Становішча цела і ног</h4>
             <ul>
               <li>Устойлівае і зручнае.</li>
-              <li>Правша ці ляўша — вызначаемся.</li>
               <li>Стаім літарай «Т».</li>
-              <li><span class="bang">У плоскасьці страляньня!!!</span> бокам да лука.</li>
+              <li>Стаім бокам да мішэні, у плоскасці стральбы.</li>
             </ul>
           </div>
           <div class="tech-block">
             <h4>✋ Хват лука</h4>
             <ul>
               <li>Лёгкі, без заціску.</li>
-              <li>Нават 2–3 пальцамі.</li>
+              <li>Можна трымаць нават двума-трыма пальцамі.</li>
             </ul>
           </div>
           <div class="tech-block">
             <h4>🤏 Хват цецівы</h4>
             <ul>
-              <li>Трыма пальцамі!</li>
+              <li>Трыма пальцамі:</li>
               <ul>
-                <li>Тры пад стралой (наш варыянт — цэліцца лепей).</li>
-                <li>Два пад стралой.</li>
-                <li>«Гульня пальцамі».</li>
+                <li>Тры пальцы пад стралой — наш варыянт, так прасцей цэліцца.</li>
+                <li>Адзін палец над стралой, два пад стралой.</li>
+                <li>Варыяцыі з пальцамі.</li>
               </ul>
             </ul>
           </div>
           <div class="tech-block">
-            <h4>🪢 Нацяжэньне цецівы</h4>
+            <h4>🪢 Нацяжэнне цецівы</h4>
             <ul>
               <li>Плаўна да апорнай кропкі.</li>
-              <li><span class="bang">Апорная кропка на твары!</span></li>
+              <li><span class="bang">Апорная кропка — на твары.</span></li>
             </ul>
           </div>
           <div class="tech-block">
-            <h4>🎯 Прыцэльваньне</h4>
+            <h4>🎯 Прыцэльванне</h4>
             <ul>
-              <li>Заплюшчваем адно вока і цэлім наканечнікам.</li>
+              <li>Заплюшчваем адно вока і цэлімся наканечнікам стралы.</li>
+              <li>Не прыцэльваемся доўга, бо стомімся.</li>
             </ul>
           </div>
           <div class="tech-block">
             <h4>💨 Выпуск</h4>
             <ul>
-              <li>Без рэзкасьці, з суправаджэньнем позіркам.</li>
-              <li>Плаўна адводзім руку.</li>
+              <li>Без рэзкасці, з суправаджэннем позіркам.</li>
+              <li>Плаўна адводзім руку назад.</li>
             </ul>
           </div>
         </div>
@@ -342,7 +354,7 @@
       <div class="cards" style="margin-top:12px">
         <div class="card">
           <h3>📣 Далей на майстар-класе</h3>
-          <p class="muted-note">Паказваю, як страляць → пытаньні → практыка. 🏹</p>
+          <p class="muted-note">Паказваю, як страляць → пытанні → практыка. 🏹</p>
         </div>
       </div>
     </section>
@@ -354,7 +366,7 @@
 
   </main>
 
-  <script src="luk.js?v=1"></script>
+  <script src="luk.js?v=2"></script>
 </body>
 
 </html>
